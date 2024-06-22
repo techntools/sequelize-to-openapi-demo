@@ -1,0 +1,53 @@
+{
+  "name": "sequelize-to-openapi-demo",
+  "version": "0.2.1",
+  "description": "Generate OpenAPI 3 schemas with sequelize-to-openapi",
+  "main": "",
+  "scripts": {
+    "compile": "tsc --watch",
+    "build": "tsc",
+    "dev": "DOTENV_CONFIG_PATH=.env nodemon -x 'node -r dotenv/config build/server.js'",
+    "debug": "DOTENV_CONFIG_PATH=.env nodemon -x 'node --inspect -r dotenv/config build/server.js'",
+    "start": "DOTENV_CONFIG_PATH=.env node -r dotenv/config build/server.js"
+  },
+  "repository": {},
+  "dependencies": {
+    "@scalar/express-api-reference": "^0.4.77",
+    "@techntools/sequelize-to-openapi": "^0.4.9",
+    "@wesleytodd/openapi": "^1.0.0",
+    "ajv-keywords": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "bufferutil": "^4.0.8",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "compression": "^1.7.4",
+    "connect-busboy": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.10.1",
+    "reflect-metadata": "^0.2.2",
+    "sequelize-typescript": "^2.1.6",
+    "superagent": "^9.0.2",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/compression": "^1.7.5",
+    "@types/connect-busboy": "^1.0.3",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.14.8",
+    "@types/superagent": "^8.1.7",
+    "@types/uuid": "^10.0.0",
+    "source-map-support": "^0.5.21",
+    "typescript": "^5.5.2"
+  },
+  "author": "Santosh Bandichode",
+  "license": "MIT"
+}

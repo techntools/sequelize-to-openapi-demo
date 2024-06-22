@@ -1,0 +1,15 @@
+# Dependency directory
+node_modules/
+build/
+
+*.log
+*.dat
+*.out
+*.gz
+*.swp
+
+logs
+
+# API keys and secrets
+.env
+.env.*
