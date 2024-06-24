@@ -27,7 +27,7 @@ export class CompanyController extends AppController {
                 requestBodySchema: CreateCompanySchema,
                 summary: 'Create Company'
             })),
-            this.create
+            AppController.asyncHandler(this.create),
         )
 
         this.router.get(
@@ -38,7 +38,7 @@ export class CompanyController extends AppController {
                 responseData: paginatedResponse(GetCompanySchema),
                 summary: 'Get Companies'
             })),
-            this.findAll
+            AppController.asyncHandler(this.findAll),
         )
 
         this.router.get(
@@ -47,7 +47,7 @@ export class CompanyController extends AppController {
                 responseData: GetCompanySchema,
                 summary: 'Get Company'
             })),
-            this.findById
+            AppController.asyncHandler(this.findById),
         )
 
         this.router.patch(
@@ -56,7 +56,7 @@ export class CompanyController extends AppController {
                 requestBodySchema: UpdateCompanySchema,
                 summary: 'Update Company'
             })),
-            this.update
+            AppController.asyncHandler(this.update),
         )
 
         this.router.delete(
@@ -64,33 +64,33 @@ export class CompanyController extends AppController {
             oapi.validPath(oapiPathDef({
                 summary: 'Delete Company'
             })),
-            this.remove
+            AppController.asyncHandler(this.remove),
         )
 
         return this
     }
 
-    create = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(companyService.create(req.body), next)
+    create = async (req: Request) => {
+        return companyService.create(req.body)
     }
 
-    findAll = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(companyService.findAll(
+    findAll = async (req: Request) => {
+        return companyService.findAll(
             plainToClass(PageOptions, req.query),
             req.query.q as string
-        ), next)
+        )
     }
 
-    findById = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(companyService.findById(parseInt(req.params.id)), next)
+    findById = async (req: Request) => {
+        return companyService.findById(parseInt(req.params.id))
     }
 
-    update = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(companyService.update(parseInt(req.params.id), req.body), next)
+    update = async (req: Request) => {
+        return companyService.update(parseInt(req.params.id), req.body)
     }
 
-    remove = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(companyService.remove(parseInt(req.params.id)), next)
+    remove = async (req: Request) => {
+        return companyService.remove(parseInt(req.params.id))
     }
 }
 

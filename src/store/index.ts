@@ -1,6 +1,6 @@
 import mysql from './mysql'
 
-import { AsyncFunction } from '../lib/types';
+import { AsyncFunction } from '../lib/types'
 
 
 export class Store {

@@ -28,7 +28,7 @@ export class OfficeController extends AppController {
                 requestBodySchema: CreateJupyterSchema,
                 summary: 'Test Sequelize notIn'
             })),
-            this.create
+            this.handleReq
         )
 
         this.router.post(
@@ -38,7 +38,7 @@ export class OfficeController extends AppController {
                 summary: 'Test Sequelize not'
             })),
             this.validate.bind(null, ajv.compile(CreateMarsSchema)),
-            this.create
+            this.handleReq
         )
 
         this.router.post(
@@ -48,11 +48,11 @@ export class OfficeController extends AppController {
                 summary: 'Test Sequelize is'
             })),
             this.validate.bind(null, ajv.compile(CreateVenusSchema)),
-            this.create
+            this.handleReq
         )
     }
 
-    validate = async (validate: ValidateFunction, req: Request, _: Response, next: NextFunction) => {
+    validate = (validate: ValidateFunction, req: Request, _: Response, next: NextFunction) => {
         const valid = validate(req.body)
         if (!valid) {
             const err = new Error('Request validation failed')
@@ -64,7 +64,7 @@ export class OfficeController extends AppController {
         next()
     }
 
-    create = async (_: Request, res: Response) => {
+    handleReq = (_: Request, res: Response) => {
         res.end()
     }
 }

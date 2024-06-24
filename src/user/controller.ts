@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request } from 'express'
 
 import { plainToClass } from 'class-transformer'
 
@@ -37,7 +37,7 @@ export class UserController extends AppController {
                 requestBodySchema: CreateUserSchema,
                 summary: 'Create User'
             })),
-            this.create
+            AppController.asyncHandler(this.create),
         )
 
         this.router.get(
@@ -45,7 +45,7 @@ export class UserController extends AppController {
             oapi.validPath(oapiPathDef({
                 summary: 'Get User'
             })),
-            this.findOne
+            AppController.asyncHandler(this.findOne),
         )
 
         this.router.get(
@@ -56,7 +56,7 @@ export class UserController extends AppController {
                 responseData: paginatedResponse(GetUserSchema),
                 summary: 'Get Users'
             })),
-            this.findAll
+            AppController.asyncHandler(this.findAll),
         )
 
         this.router.patch(
@@ -65,7 +65,7 @@ export class UserController extends AppController {
                 requestBodySchema: UpdateUserSchema,
                 summary: 'Update User'
             })),
-            this.update
+            AppController.asyncHandler(this.update),
         )
 
         this.router.delete(
@@ -73,7 +73,7 @@ export class UserController extends AppController {
             oapi.validPath(oapiPathDef({
                 summary: 'Delete User'
             })),
-            this.remove
+            AppController.asyncHandler(this.remove),
         )
 
         this.router.post(
@@ -82,7 +82,7 @@ export class UserController extends AppController {
                 requestBodySchema: CreateProfileSchema,
                 summary: 'Update Profile'
             })),
-            this.updateProfile
+            AppController.asyncHandler(this.updateProfile),
         )
 
         this.router.post(
@@ -91,7 +91,7 @@ export class UserController extends AppController {
                 requestBodySchema: AddFriendsSchema,
                 summary: 'Add Friends'
             })),
-            this.addFriends
+            AppController.asyncHandler(this.addFriends),
         )
 
         this.router.delete(
@@ -100,7 +100,7 @@ export class UserController extends AppController {
                 requestBodySchema: RemoveFriendsSchema,
                 summary: 'Remove Friends'
             })),
-            this.removeFriends
+            AppController.asyncHandler(this.removeFriends),
         )
 
         this.router.get(
@@ -111,7 +111,7 @@ export class UserController extends AppController {
                 responseData: paginatedResponse(GetFriendsSchema),
                 summary: 'Get Friends'
             })),
-            this.findFriends
+            AppController.asyncHandler(this.findFriends),
         )
 
         this.router.get(
@@ -122,7 +122,7 @@ export class UserController extends AppController {
                 responseData: paginatedResponse(GetDocumentsSchema),
                 summary: 'Get Documents'
             })),
-            this.findDocuments
+            AppController.asyncHandler(this.findDocuments),
         )
 
         this.router.delete(
@@ -131,80 +131,80 @@ export class UserController extends AppController {
                 requestBodySchema: RemoveDocumentsSchema,
                 summary: 'Remove Documents'
             })),
-            this.removeFriends
+            AppController.asyncHandler(this.removeFriends),
         )
 
         this.router.post(
             '/:id/document/upload',
-            oapi.validPath(oapiPathDef({
+            oapi.path(oapiPathDef({
                 multipart: true,
                 requestBodySchema: UploadDocumentSchema,
                 summary: 'Upload Document'
             })),
-            AppController.asyncHandler(fileupload),
-            this.uploadDocument
+            AppController.asyncMiddleware(fileupload),
+            AppController.asyncHandler(this.uploadDocument),
         )
 
         return this
     }
 
-    create = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.create(req.body), next)
+    create = async (req: Request) => {
+        return userService.create(req.body)
     }
 
-    findAll = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.findAll(
+    findAll = async (req: Request) => {
+        return userService.findAll(
             plainToClass(PageOptions, req.query),
             req.query.q as string
-        ), next)
+        )
     }
 
-    findOne = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.findById(parseInt(req.params.id)), next)
+    findOne = async (req: Request) => {
+        return userService.findById(parseInt(req.params.id))
     }
 
-    update = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.update(parseInt(req.params.id), req.body), next)
+    update = async (req: Request) => {
+        return userService.update(parseInt(req.params.id), req.body)
     }
 
-    remove = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.remove(parseInt(req.params.id)), next)
+    remove = async (req: Request) => {
+        return userService.remove(parseInt(req.params.id))
     }
 
-    updateProfile = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.updateProfile(parseInt(req.params.id), req.body), next)
+    updateProfile = async (req: Request) => {
+        return userService.updateProfile(parseInt(req.params.id), req.body)
     }
 
-    addFriends = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.addFriends(parseInt(req.params.id), req.body), next)
+    addFriends = async (req: Request) => {
+        return userService.addFriends(parseInt(req.params.id), req.body)
     }
 
-    removeFriends = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.removeFriends(parseInt(req.params.id), req.body), next)
+    removeFriends = async (req: Request) => {
+        return userService.removeFriends(parseInt(req.params.id), req.body)
     }
 
-    findFriends = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.findFriends(
+    findFriends = async (req: Request) => {
+        return userService.findFriends(
             parseInt(req.params.id),
             plainToClass(PageOptions, req.query),
             req.query.q as string
-        ), next)
+        )
     }
 
-    findDocuments = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.findDocuments(
+    findDocuments = async (req: Request) => {
+        return userService.findDocuments(
             parseInt(req.params.id),
             plainToClass(PageOptions, req.query),
             req.query.q as string
-        ), next)
+        )
     }
 
-    removeDocuments = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.removeDocuments(parseInt(req.params.id), req.body), next)
+    removeDocuments = async (req: Request) => {
+        return userService.removeDocuments(parseInt(req.params.id), req.body)
     }
 
-    uploadDocument = async (req: Request, res: Response, next: NextFunction) => {
-        res.success(userService.uploadDocument(parseInt(req.params.id), req['files']), next)
+    uploadDocument = async (req: Request) => {
+        return userService.uploadDocument(parseInt(req.params.id), req['files'])
     }
 }
 

@@ -1,6 +1,6 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Router, Request, Response, NextFunction } from 'express'
 
-import { AsyncRequestHandler } from '../lib/types';
+import { AsyncRequestHandler } from '../lib/types'
 
 
 export default class AppController {
@@ -8,7 +8,11 @@ export default class AppController {
 
     public router: Router = Router()
 
-    static asyncHandler = (fn: AsyncRequestHandler) => (req: Request, res: Response, next: NextFunction) => {
+    static asyncMiddleware = (fn: AsyncRequestHandler) => (req: Request, res: Response, next: NextFunction) => {
         return fn(req, res, next).catch(next)
+    }
+
+    static asyncHandler = (fn: AsyncRequestHandler) => (req: Request, res: Response, next: NextFunction) => {
+        res.success(fn(req, res, next), next)
     }
 }

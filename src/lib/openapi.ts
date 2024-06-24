@@ -136,7 +136,7 @@ export function oapiPathDef(def: {
 
 export function errorHandler(err: Error, _: Request, res: Response, next: NextFunction) {
     if (!err['validationErrors'])
-        return next()
+        return next(err)
 
     let status = 400
 
