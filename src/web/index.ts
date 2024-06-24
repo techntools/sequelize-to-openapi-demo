@@ -10,6 +10,7 @@ import { apiReference } from '@scalar/express-api-reference'
 
 import { SuccessResponse, ResponseData } from '../lib/server-response'
 import oapi, { errorHandler as oapiErrorHandler } from '../lib/openapi'
+import { ensureDirExists } from '../lib/util'
 
 import envConfig from '../config'
 
@@ -94,6 +95,8 @@ export class Web {
 
             this.json(new SuccessResponse(result))
         }
+
+        await ensureDirExists('files')
 
         return this
     }
