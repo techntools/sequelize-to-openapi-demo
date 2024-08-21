@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import openapi from '@wesleytodd/openapi'
 
-import { FailureResponse } from '../lib/server-response'
+import { FailureResponse } from '../lib/service-response'
 import { ERR_CODES } from '../lib/error'
 
 import { Order } from './pagination'

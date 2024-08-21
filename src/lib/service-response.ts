@@ -1,6 +1,6 @@
 export type ResponseData = Record<string, any> | Record<string, any>[]
 
-export class ServerResponse {
+export class ServiceResponse {
     success: boolean
     message?: string
 
@@ -17,7 +17,7 @@ export class ServerResponse {
     }
 }
 
-export class FailureResponse extends ServerResponse {
+export class FailureResponse extends ServiceResponse {
     code?: string
     details: {}
 
@@ -36,7 +36,7 @@ export class FailureResponse extends ServerResponse {
     }
 }
 
-export class SuccessResponse extends ServerResponse {
+export class SuccessResponse extends ServiceResponse {
     data?: ResponseData
 
     constructor(data?: ResponseData) {

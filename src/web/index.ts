@@ -8,7 +8,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import { apiReference } from '@scalar/express-api-reference'
 
-import { SuccessResponse, ResponseData } from '../lib/server-response'
+import { SuccessResponse, ResponseData } from '../lib/service-response'
 import oapi, { errorHandler as oapiErrorHandler } from '../lib/openapi'
 import { ensureDirExists } from '../lib/util'
 
