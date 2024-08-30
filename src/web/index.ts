@@ -10,7 +10,7 @@ import { apiReference } from '@scalar/express-api-reference'
 
 import { SuccessResponse, ResponseData } from '../lib/service-response'
 import oapi, { errorHandler as oapiErrorHandler } from '../lib/openapi'
-import { ensureDirExists } from '../lib/util'
+import { ensureDirExists } from '../lib/shared'
 
 import envConfig from '../config'
 

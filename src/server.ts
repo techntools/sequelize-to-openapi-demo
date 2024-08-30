@@ -1,5 +1,8 @@
 import http from 'http';
 
+/* To ensure extras are added onto the global */
+import './lib';
+
 import web from './web';
 import store from './store';
 import envConfig from './config';
