@@ -5,13 +5,16 @@ import envConfig from '../config'
 
 export class MySQL {
     async init() {
-        const { dialect, name, username, password } = envConfig.dbConfig
+        const { dialect, name, host, username, password } = envConfig.dbConfig
 
         const sequelize = new Sequelize(
             name,
             username,
             password,
-            { dialect }
+            {
+                host,
+                dialect
+            }
         )
 
         sequelize.addModels([__dirname + '/../**/models/*.js'])

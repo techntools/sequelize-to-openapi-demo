@@ -11,6 +11,9 @@ export class DatabaseConfig {
     name: string
 
     @IsString()
+    host: string
+
+    @IsString()
     username: string
 
     @IsString()
@@ -53,6 +56,7 @@ export class EnvConfig {
         this.dbConfig = new DatabaseConfig
         this.dbConfig.dialect = process.env.DB_DIALECT as Dialect
         this.dbConfig.name = process.env.DB_NAME
+        this.dbConfig.host = process.env.DB_HOST
         this.dbConfig.username = process.env.DB_USERNAME
         this.dbConfig.password = process.env.DB_PASSWORD
 
