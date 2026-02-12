@@ -13,7 +13,7 @@
   "repository": {},
   "dependencies": {
     "@scalar/express-api-reference": "^0.4.112",
-    "@techntools/sequelize-to-openapi": "^0.4.9",
+    "@techntools/sequelize-to-openapi": "^1.4.0",
     "@wesleytodd/openapi": "^1.1.0",
     "ajv-keywords": "^5.1.0",
     "body-parser": "^1.20.2",
@@ -29,6 +29,8 @@
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.10.3",
+    "pg": "^8.18.0",
+    "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
     "sequelize-typescript": "^2.1.6",
     "superagent": "^9.0.2",
